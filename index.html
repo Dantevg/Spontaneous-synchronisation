@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>Spontaneous synchronisation</title>
+	
+	<style>
+		body{
+			margin: 0px;
+			overflow: hidden;
+		}
+	</style>
+	
+	<script type="module">
+		import Fireflies from "./Fireflies.js"
+		import Config from "./Config.js"
+		
+		window.onload = () => {
+			const canvas = document.getElementsByTagName("canvas")[0]
+			canvas.width = window.innerWidth
+			canvas.height = window.innerHeight
+			window.onresize = () => {
+				canvas.width = window.innerWidth
+				canvas.height = window.innerHeight
+			}
+			
+			const sync = new Fireflies(canvas, 10)
+			console.log(sync)
+			
+			window.requestAnimationFrame((t) => sync.draw(t))
+		}
+	</script>
+</head>
+<body>
+	<canvas></canvas>
+</body>
+</html>
