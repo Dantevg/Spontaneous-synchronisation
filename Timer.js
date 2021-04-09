@@ -24,17 +24,14 @@ export default class Timer {
 		this._refractoryPeriod = x
 	}
 	
-	tick(nNeighbours){
+	tick(){
 		if(this.brightness > 0) return
 		this.timer += this.timer / 10
 	}
 	
 	activate(){
 		if(Timer.doSynchronise){
-			const neighbours = this.field.getNeighbours(this)
-			for(const neighbour of neighbours){
-				neighbour.tick(neighbours.length)
-			}
+			this.field.getNeighbours(this).forEach(n => n.tick())
 		}
 		this.timer = 0
 		this.brightness = 1

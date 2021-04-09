@@ -25,13 +25,9 @@ export default class Field {
 	}
 	
 	getNeighbours(p){
-		let neighbours = []
 		const detectionSq = Config.detectionRadius**2
-		for(const point of this.points){
-			if(point != p && Vector.distSq(point.pos, p.pos) <= detectionSq){
-				neighbours.push(point)
-			}
-		}
+		const neighbours = this.points.filter(point => point != p)
+			.filter(point => Vector.distSq(point.pos, p.pos) <= detectionSq)
 		return neighbours
 	}
 	
