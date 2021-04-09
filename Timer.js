@@ -1,21 +1,40 @@
 export default class Timer {
+	static period = 50
+	static refractoryPeriod = 10
+	static doSynchronise = true
+	
 	constructor(field, period, refractoryPeriod){
 		this.field = field
-		this.period = period
-		this.refractoryPeriod = refractoryPeriod
+		this._period = period
+		this._refractoryPeriod = refractoryPeriod
 		this.timer = Math.random()
 		this.brightness = Math.random()
 	}
 	
-	tick(){
+	get period(){
+		return this._period ?? Timer.period
+	}
+	get refractoryPeriod(){
+		return this._refractoryPeriod ?? Timer.refractoryPeriod
+	}
+	set period(x){
+		this._period = x
+	}
+	set refractoryPeriod(x){
+		this._refractoryPeriod = x
+	}
+	
+	tick(nNeighbours){
 		if(this.brightness > 0) return
 		this.timer += this.timer / 10
 	}
 	
 	activate(){
-		const neighbours = this.field.getNeighbours(this)
-		for(const neighbour of neighbours){
-			neighbour.tick()
+		if(Timer.doSynchronise){
+			const neighbours = this.field.getNeighbours(this)
+			for(const neighbour of neighbours){
+				neighbour.tick(neighbours.length)
+			}
 		}
 		this.timer = 0
 		this.brightness = 1

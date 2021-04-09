@@ -16,7 +16,4 @@ export default class Config {
 	static speed = 5
 	static maxSpeed = 50
 	static detectionRadius = 500
-	static period = 50
-	static refractoryPeriod = 10
-	static timerIncrement = 0.3
 }

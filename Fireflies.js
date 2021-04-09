@@ -2,6 +2,7 @@ import Config from "./Config.js"
 import Vector from "./lib/Vector.js"
 import Field from "./Field.js"
 import Point from "./Point.js"
+import Timer from "./Timer.js"
 
 export default class Fireflies {
 	constructor(canvasElement, nPoints){
@@ -20,10 +21,9 @@ export default class Fireflies {
 			this.mouse.y = e.clientY
 		}
 		
-		const origTimerIncrement = Config.timerIncrement
-		Config.timerIncrement = 0
+		Timer.doSynchronise = false
 		window.onkeydown = e => {
-			if(e.key == " ") Config.timerIncrement = origTimerIncrement
+			if(e.key == " ") Timer.doSynchronise = true
 		}
 		
 		window.onmousedown = e => {

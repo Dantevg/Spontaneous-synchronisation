@@ -5,7 +5,7 @@ import Vector from "./lib/Vector.js"
 
 export default class Point extends Timer {
 	constructor(field, pos){
-		super(field, Config.period, Config.refractoryPeriod)
+		super(field)
 		
 		this.pos = pos ?? field.randomPosition()
 		this.vel = new Vector(Math.random() - 0.5, Math.random() - 0.5)
